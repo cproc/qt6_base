@@ -97,7 +97,7 @@ function(qt_run_config_test_architecture)
     #
     # Genode: set to FALSE for architecture-independent generated api files
     #
-	if (FALSE)
+	if (TRUE)
         set(TEST_architecture 1 CACHE INTERNAL "Ran the architecture test")
         set(TEST_architecture_arch "${_architecture}" CACHE INTERNAL "Target machine architecture")
         list(APPEND QT_BASE_CONFIGURE_TESTS_VARS_TO_EXPORT TEST_architecture_arch)
