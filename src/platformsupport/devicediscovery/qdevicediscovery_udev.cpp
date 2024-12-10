@@ -10,11 +10,7 @@
 #include <QSocketNotifier>
 #include <QLoggingCategory>
 
-#ifdef Q_OS_FREEBSD
-#include <dev/evdev/input.h>
-#else
 #include <linux/input.h>
-#endif
 
 QT_BEGIN_NAMESPACE
 
