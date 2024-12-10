@@ -97,13 +97,13 @@ QStringList QStyleFactory::keys()
     const PluginKeyMap::const_iterator cend = keyMap.constEnd();
     for (PluginKeyMap::const_iterator it = keyMap.constBegin(); it != cend; ++it)
         list.append(it.value());
-#if QT_CONFIG(style_windows)
-    if (!list.contains("Windows"_L1))
-        list << "Windows"_L1;
-#endif
 #if QT_CONFIG(style_fusion)
     if (!list.contains("Fusion"_L1))
         list << "Fusion"_L1;
+#endif
+#if QT_CONFIG(style_windows)
+    if (!list.contains("Windows"_L1))
+        list << "Windows"_L1;
 #endif
     return list;
 }
