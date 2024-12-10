@@ -601,7 +601,7 @@ void QCoreApplicationPrivate::initConsole()
 
 void QCoreApplicationPrivate::initLocale()
 {
-#if defined(QT_BOOTSTRAPPED)
+#if defined(QT_BOOTSTRAPPED) || defined(Q_OS_GENODE)
     // Don't try to control bootstrap library locale or encoding.
 #elif defined(Q_OS_UNIX)
     Q_CONSTINIT static bool qt_locale_initialized = false;
@@ -2411,7 +2411,7 @@ static QString qAppFileName()
 #  elif defined(Q_OS_LINUX)
     // this includes the Embedded Android builds
     return QFile::decodeName(qt_readlink("/proc/self/exe"));
-#  elif defined(AT_EXECPATH)
+#  elif defined(AT_EXECPATH) && !defined(Q_OS_GENODE)
     // seen on FreeBSD, but I suppose the other BSDs could adopt this API
     char execfn[PATH_MAX];
     if (elf_aux_info(AT_EXECPATH, execfn, sizeof(execfn)) != 0)

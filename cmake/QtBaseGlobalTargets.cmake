@@ -41,6 +41,7 @@ write_basic_package_version_file(
     "${__build_internals_build_dir}/${INSTALL_CMAKE_NAMESPACE}BuildInternalsConfigVersionImpl.cmake"
     VERSION ${PROJECT_VERSION}
     COMPATIBILITY AnyNewerVersion
+    ARCH_INDEPENDENT
 )
 qt_internal_write_qt_package_version_file(
     "${INSTALL_CMAKE_NAMESPACE}BuildInternals"
@@ -111,7 +112,7 @@ qt_feature_module_end(GlobalConfig OUT_VAR_PREFIX "__GlobalConfig_")
 # The version script support check has to happen after we determined which linker is going
 # to be used. The linker decision happens in the qtbase/configure.cmake file that is processed
 # above.
-qt_run_linker_version_script_support()
+#qt_run_linker_version_script_support()
 
 qt_generate_global_config_pri_file()
 qt_generate_global_module_pri_file()
@@ -195,6 +196,7 @@ write_basic_package_version_file(
     "${__GlobalConfig_build_dir}/${INSTALL_CMAKE_NAMESPACE}ConfigVersionImpl.cmake"
     VERSION ${PROJECT_VERSION}
     COMPATIBILITY AnyNewerVersion
+    ARCH_INDEPENDENT
 )
 qt_internal_write_qt_package_version_file(
     "${INSTALL_CMAKE_NAMESPACE}"

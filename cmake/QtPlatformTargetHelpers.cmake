@@ -17,7 +17,6 @@ function(qt_internal_setup_public_platform_target)
         INTERFACE
         $<BUILD_INTERFACE:${build_interface_definition_dir}>
         $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/include>
-        $<INSTALL_INTERFACE:${install_interface_definition_dir}>
         $<INSTALL_INTERFACE:${INSTALL_INCLUDEDIR}>
         )
     target_compile_definitions(Platform INTERFACE ${QT_PLATFORM_DEFINITIONS})

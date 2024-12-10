@@ -61,7 +61,7 @@
 # define SCHED_IDLE    5
 #endif
 
-#if defined(Q_OS_DARWIN) || !defined(Q_OS_ANDROID) && !defined(Q_OS_OPENBSD) && defined(_POSIX_THREAD_PRIORITY_SCHEDULING) && (_POSIX_THREAD_PRIORITY_SCHEDULING-0 >= 0)
+#if (defined(Q_OS_DARWIN) || !defined(Q_OS_ANDROID) && !defined(Q_OS_OPENBSD) && defined(_POSIX_THREAD_PRIORITY_SCHEDULING) && (_POSIX_THREAD_PRIORITY_SCHEDULING-0 >= 0)) && !defined(Q_OS_GENODE)
 #define QT_HAS_THREAD_PRIORITY_SCHEDULING
 #endif
 
@@ -414,7 +414,7 @@ int QThread::idealThreadCount() noexcept
     } else {
         cores = (int)psd.psd_proc_cnt;
     }
-#elif (defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)) || defined(Q_OS_FREEBSD)
+#elif ((defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)) || defined(Q_OS_FREEBSD)) && !defined(Q_OS_GENODE)
 #  if defined(Q_OS_FREEBSD) && !defined(CPU_COUNT_S)
 #    define CPU_COUNT_S(setsize, cpusetp)   ((int)BIT_COUNT(setsize, cpusetp))
     // match the Linux API for simplicity
@@ -437,7 +437,7 @@ int QThread::idealThreadCount() noexcept
             return 1;
     }
     cores = CPU_COUNT_S(sizeof(cpu_set_t) * size, cpuset.data());
-#elif defined(Q_OS_BSD4)
+#elif defined(Q_OS_BSD4) && !defined(Q_OS_GENODE)
     // OpenBSD, NetBSD, BSD/OS, Darwin (macOS, iOS, etc.)
     size_t len = sizeof(cores);
     int mib[2];

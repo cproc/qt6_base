@@ -77,8 +77,8 @@
     (defined(__NetBSD__) && __NetBSD_Version__ >= 600000000)
 #  define HAVE_PIPE2    1
 #endif
-#if defined(__FreeBSD__) || defined(__DragonFly__) || defined(__FreeBSD_kernel__) || \
-    defined(__OpenBSD__) || defined(__NetBSD__) || defined(__APPLE__)
+#if (defined(__FreeBSD__) || defined(__DragonFly__) || defined(__FreeBSD_kernel__) || \
+    defined(__OpenBSD__) || defined(__NetBSD__) || defined(__APPLE__)) && !defined(__GENODE__)
 #  define HAVE_WAIT4    1
 #endif
 
@@ -921,7 +921,7 @@ int forkfd_close(int ffd)
     return close(ffd);
 }
 
-#if defined(__FreeBSD__) && __FreeBSD__ >= 9
+#if defined(__FreeBSD__) && __FreeBSD__ >= 9 && 0
 #  include "forkfd_freebsd.c"
 #elif defined(__linux__)
 #  include "forkfd_linux.c"

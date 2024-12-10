@@ -334,7 +334,7 @@ function(qt_internal_add_module target)
     # FIXME: This workaround is needed because the deployment logic
     # for iOS and WASM just copies/embeds the directly linked library,
     # which will just be a versioned symlink to the actual library.
-    if((UIKIT OR WASM) AND BUILD_SHARED_LIBS)
+    if(((UIKIT OR WASM) AND BUILD_SHARED_LIBS) OR TRUE)
         set(version_args "")
     else()
         set(version_args
@@ -758,6 +758,7 @@ set(QT_ALLOW_MISSING_TOOLS_PACKAGES TRUE)")
         "${config_build_dir}/${INSTALL_CMAKE_NAMESPACE}${target}ConfigVersionImpl.cmake"
         VERSION ${PROJECT_VERSION}
         COMPATIBILITY AnyNewerVersion
+        ARCH_INDEPENDENT
     )
     qt_internal_write_qt_package_version_file(
         "${INSTALL_CMAKE_NAMESPACE}${target}"
