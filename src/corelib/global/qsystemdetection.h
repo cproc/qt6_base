@@ -14,6 +14,7 @@
 /*
    The operating system, must be one of: (Q_OS_x)
 
+     GENODE   - Genode
      DARWIN   - Any Darwin system (macOS, iOS, watchOS, tvOS)
      MACOS    - macOS
      IOS      - iOS
@@ -98,6 +99,9 @@
 #elif defined(__FreeBSD__) || defined(__DragonFly__) || defined(__FreeBSD_kernel__)
 #  ifndef __FreeBSD_kernel__
 #    define Q_OS_FREEBSD
+#    ifdef __GENODE__
+#      define Q_OS_GENODE
+#    endif
 #  endif
 #  define Q_OS_FREEBSD_KERNEL
 #  define Q_OS_BSD4
