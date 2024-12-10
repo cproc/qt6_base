@@ -904,7 +904,7 @@ qt_internal_extend_target(Core CONDITION QT_FEATURE_filesystemwatcher AND QT_FEA
         io/qfilesystemwatcher_inotify.cpp io/qfilesystemwatcher_inotify_p.h
 )
 
-qt_internal_extend_target(Core CONDITION QT_FEATURE_filesystemwatcher AND UNIX AND NOT MACOS AND NOT QT_FEATURE_inotify AND (APPLE OR FREEBSD OR NETBSD OR OPENBSD)
+qt_internal_extend_target(Core CONDITION QT_FEATURE_filesystemwatcher AND UNIX AND NOT MACOS AND NOT QT_FEATURE_inotify AND (APPLE OR FREEBSD OR NETBSD OR OPENBSD) AND 0
     SOURCES
         io/qfilesystemwatcher_kqueue.cpp io/qfilesystemwatcher_kqueue_p.h
 )
