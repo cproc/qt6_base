@@ -103,7 +103,7 @@ static int qt_gettid()
     pthread_threadid_np(NULL, &tid);
     return tid;
 }
-#elif defined(Q_OS_FREEBSD_KERNEL) && defined(__FreeBSD_version) && __FreeBSD_version >= 900031
+#elif defined(Q_OS_FREEBSD_KERNEL) && defined(__FreeBSD_version) && __FreeBSD_version >= 900031 && !defined(Q_OS_GENODE)
 #  include <pthread_np.h>
 static int qt_gettid()
 {
