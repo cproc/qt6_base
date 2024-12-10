@@ -601,7 +601,7 @@ void QCoreApplicationPrivate::initConsole()
 
 void QCoreApplicationPrivate::initLocale()
 {
-#if defined(QT_BOOTSTRAPPED)
+#if defined(QT_BOOTSTRAPPED) || defined(Q_OS_GENODE)
     // Don't try to control bootstrap library locale or encoding.
 #elif defined(Q_OS_UNIX)
     Q_CONSTINIT static bool qt_locale_initialized = false;
