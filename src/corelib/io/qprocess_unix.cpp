@@ -536,11 +536,13 @@ static int useForkFlags(const QProcessPrivate::UnixExtras *unixExtras)
     return FFD_USE_FORK;
 #endif
 
+#if 0
     // Dynamically detect whether libasan or libtsan are loaded into the
     // process' memory. We need this because the user's code may be compiled
     // with ASan or TSan, but not Qt.
     if (__interceptor_vfork != nullptr)
         return FFD_USE_FORK;
+#endif
 
     if (!unixExtras || !unixExtras->childProcessModifier)
         return 0;           // no modifier was supplied
