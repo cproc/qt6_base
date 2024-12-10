@@ -921,7 +921,7 @@ int forkfd_close(int ffd)
     return close(ffd);
 }
 
-#if defined(__FreeBSD__) && __FreeBSD__ >= 9
+#if defined(__FreeBSD__) && __FreeBSD__ >= 9 && 0
 #  include "forkfd_freebsd.c"
 #elif defined(__linux__)
 #  include "forkfd_linux.c"
