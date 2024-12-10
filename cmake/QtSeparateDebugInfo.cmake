@@ -83,6 +83,7 @@ function(qt_internal_generate_binary_strip_wrapper)
     if(DEFINED CACHE{QT_INTERNAL_STRIP_SUPPORTS_KEEP_SECTION}
             OR QT_NO_STRIP_WRAPPER
             OR (NOT QT_BUILD_SHARED_LIBS)
+            OR 1
         )
         return()
     endif()
