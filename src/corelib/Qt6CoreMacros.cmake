@@ -2407,6 +2407,8 @@ function(_qt_internal_add_library target)
         # CMake defaults to using .so extensions for loadable modules, aka plugins,
         # but Qt plugins are actually suffixed with .dylib.
         set_property(TARGET "${target}" PROPERTY SUFFIX ".dylib")
+    else()
+	    set_property(TARGET "${target}" PROPERTY SUFFIX ".lib.so")
     endif()
 
     if(ANDROID)
