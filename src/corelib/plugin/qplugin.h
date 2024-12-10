@@ -165,7 +165,7 @@ template <auto (&PluginMetaData)> class QPluginMetaDataV2
 #if defined(QT_STATICPLUGIN)
 #  define QT_PLUGIN_METADATAV2_SECTION
     using Payload = StaticPayload;
-#elif defined(Q_OF_ELF)
+#elif defined(Q_OF_ELF) && !defined(Q_OS_GENODE)
 #  ifdef Q_CC_CLANG
 #    define QT_PLUGIN_METADATAV2_SECTION                                                            \
             __attribute__((section(".note.qt.metadata"), used, aligned(alignof(void *)),            \
