@@ -915,7 +915,7 @@ qt_feature("xcb" PUBLIC
     SECTION "Platform plugins"
     LABEL "XCB"
     AUTODETECT NOT APPLE
-    CONDITION QT_FEATURE_thread AND TARGET XCB::XCB AND TEST_xcb_syslibs AND QT_FEATURE_xkbcommon_x11
+    CONDITION QT_FEATURE_thread AND TARGET XCB::XCB AND QT_FEATURE_xkbcommon_x11
 )
 qt_feature("xcb-glx-plugin" PUBLIC
     LABEL "GLX Plugin"
