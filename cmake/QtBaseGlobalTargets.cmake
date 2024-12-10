@@ -41,6 +41,7 @@ write_basic_package_version_file(
     "${__build_internals_build_dir}/${INSTALL_CMAKE_NAMESPACE}BuildInternalsConfigVersionImpl.cmake"
     VERSION ${PROJECT_VERSION}
     COMPATIBILITY AnyNewerVersion
+    ARCH_INDEPENDENT
 )
 qt_internal_write_qt_package_version_file(
     "${INSTALL_CMAKE_NAMESPACE}BuildInternals"
@@ -195,6 +196,7 @@ write_basic_package_version_file(
     "${__GlobalConfig_build_dir}/${INSTALL_CMAKE_NAMESPACE}ConfigVersionImpl.cmake"
     VERSION ${PROJECT_VERSION}
     COMPATIBILITY AnyNewerVersion
+    ARCH_INDEPENDENT
 )
 qt_internal_write_qt_package_version_file(
     "${INSTALL_CMAKE_NAMESPACE}"
