@@ -20,9 +20,9 @@ foreach(in_file ${IN_FILES})
         set(first_iteration FALSE)
         list(JOIN incdir " " incdir)
         list(JOIN defines " " defines)
-        string(APPEND content "QMAKE_INCDIR_${uclib} = ${incdir}
-QMAKE_DEFINES_${uclib} = ${defines}
-")
+#        string(APPEND content "QMAKE_INCDIR_${uclib} = ${incdir}
+#QMAKE_DEFINES_${uclib} = ${defines}
+#")
     endif()
     set(config_suffix "")
     if(number_of_configs GREATER "1")
