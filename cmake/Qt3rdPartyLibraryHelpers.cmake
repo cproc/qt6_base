@@ -275,6 +275,7 @@ function(qt_internal_add_3rdparty_library target)
             "${config_build_dir}/${INSTALL_CMAKE_NAMESPACE}${target}ConfigVersionImpl.cmake"
             VERSION ${PROJECT_VERSION}
             COMPATIBILITY AnyNewerVersion
+            ARCH_INDEPENDENT
         )
         qt_internal_write_qt_package_version_file(
             "${INSTALL_CMAKE_NAMESPACE}${target}"

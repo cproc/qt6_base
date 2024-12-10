@@ -758,6 +758,7 @@ set(QT_ALLOW_MISSING_TOOLS_PACKAGES TRUE)")
         "${config_build_dir}/${INSTALL_CMAKE_NAMESPACE}${target}ConfigVersionImpl.cmake"
         VERSION ${PROJECT_VERSION}
         COMPATIBILITY AnyNewerVersion
+        ARCH_INDEPENDENT
     )
     qt_internal_write_qt_package_version_file(
         "${INSTALL_CMAKE_NAMESPACE}${target}"
