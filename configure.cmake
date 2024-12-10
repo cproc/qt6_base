@@ -212,7 +212,7 @@ if(NOT QT_CONFIGURE_RUNNING)
     qt_evaluate_feature(use_lld_linker)
     qt_evaluate_feature(use_mold_linker)
 
-    qt_run_linker_version_script_support()
+#    qt_run_linker_version_script_support()
 endif()
 
 qt_feature("version_tagging"
