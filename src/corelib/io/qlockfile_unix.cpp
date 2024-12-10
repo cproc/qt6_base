@@ -44,7 +44,7 @@
 #   include <sys/cdefs.h>
 #   include <sys/param.h>
 #   include <sys/sysctl.h>
-# if !defined(Q_OS_NETBSD)
+# if !defined(Q_OS_NETBSD) && 0
 #   include <sys/user.h>
 # endif
 #endif
@@ -215,7 +215,7 @@ QString QLockFilePrivate::processNameByPid(qint64 pid)
     if (get_thread_info(pid, &info) != B_OK)
         return QString();
     return QFile::decodeName(info.name);
-#elif defined(Q_OS_BSD4) && !defined(QT_PLATFORM_UIKIT)
+#elif defined(Q_OS_BSD4) && !defined(QT_PLATFORM_UIKIT) && 0
 # if defined(Q_OS_NETBSD)
     struct kinfo_proc2 kp;
     int mib[6] = { CTL_KERN, KERN_PROC2, KERN_PROC_PID, (int)pid, sizeof(struct kinfo_proc2), 1 };

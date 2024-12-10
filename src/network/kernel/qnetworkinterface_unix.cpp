@@ -377,7 +377,7 @@ static void getAddressExtraInfo(QNetworkAddressEntry *entry, struct sockaddr *sa
     Q_UNUSED(ifname);
 }
 
-# elif defined(Q_OS_BSD4)
+# elif defined(Q_OS_BSD4) && 0
 QT_BEGIN_INCLUDE_NAMESPACE
 #  include <net/if_dl.h>
 #if defined(QT_PLATFORM_UIKIT)
