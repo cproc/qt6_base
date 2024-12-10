@@ -343,7 +343,8 @@ if(QT_FEATURE_opengl)
         endif()
 
     elseif(NOT QT_FEATURE_opengl_dynamic)
-        target_link_libraries(Gui PUBLIC WrapOpenGL::WrapOpenGL)
+#        target_link_libraries(Gui PUBLIC WrapOpenGL::WrapOpenGL)
+        target_link_libraries(Gui PUBLIC mesa egl)
     endif()
 endif()
 
@@ -439,7 +440,8 @@ qt_internal_extend_target(Gui CONDITION QT_FEATURE_egl
         opengl/platform/egl/qeglstreamconvenience.cpp opengl/platform/egl/qeglstreamconvenience_p.h
         opengl/platform/egl/qt_egl_p.h
     LIBRARIES
-        EGL::EGL
+#        EGL::EGL
+        egl
 )
 
 # These two headers are always installed, their contents are guarded with
