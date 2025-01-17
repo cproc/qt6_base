@@ -132,6 +132,16 @@ QWidgetWindow::QWidgetWindow(QWidget *widget)
     : QWindow(*new QWidgetWindowPrivate(), nullptr)
     , m_widget(widget)
 {
+#ifdef Q_OS_GENODE
+    /*
+     * Forward window title to GUI session.
+     *
+     * This enables Qt6 applications to set a Genode label via 'setWindowTitle'
+     * from within Qt6 applications, and thus, making them identifiable to
+     * other Genode components, like a layout manager.
+     */
+    setTitle(widget->windowTitle());
+#endif /* Q_OS_GENODE */
     updateObjectName();
     if (!QCoreApplication::testAttribute(Qt::AA_ForceRasterWidgets)) {
         QSurface::SurfaceType type = QSurface::RasterSurface;
