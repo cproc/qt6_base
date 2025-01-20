@@ -585,8 +585,6 @@ void QGenodePlatformWindow::_adjust_and_set_geometry(const QRect &rect)
 		eglDestroySurface(_egl_display, _egl_surface);
 		_egl_surface = EGL_NO_SURFACE;
 	}
-
-	emit framebuffer_changed();
 }
 
 

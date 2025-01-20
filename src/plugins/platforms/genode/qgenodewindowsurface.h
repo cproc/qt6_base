@@ -27,9 +27,7 @@ class QGenodeWindowSurface : public QObject, public QPlatformBackingStore
 
 	private:
 
-		QGenodePlatformWindow *_platform_window;
-		QImage                 _image;
-		bool                   _framebuffer_changed;
+		QImage _image;
 
 	public:
 
@@ -41,10 +39,6 @@ class QGenodeWindowSurface : public QObject, public QPlatformBackingStore
 
 		/* needed for RasterGLSurface */
 		QImage toImage() const override;
-
-	public slots:
-
-		void framebuffer_changed();
 };
 
 QT_END_NAMESPACE

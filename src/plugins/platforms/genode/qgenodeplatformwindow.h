@@ -224,11 +224,6 @@ class QGenodePlatformWindow : public QObject, public QPlatformWindow
 		/* for any QGenodePlatformWindow */
 
 		void handle_hover_leave();
-
-	signals:
-
-		void framebuffer_changed();
-
 };
 
 QT_END_NAMESPACE

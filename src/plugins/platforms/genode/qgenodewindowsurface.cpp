@@ -32,36 +32,19 @@ static const bool verbose = false;
 QT_BEGIN_NAMESPACE
 
 QGenodeWindowSurface::QGenodeWindowSurface(QWindow *window)
-    : QPlatformBackingStore(window), _framebuffer_changed(true)
-{
-	//qDebug() << "QGenodeWindowSurface::QGenodeWindowSurface:" << (long)this;
-
-	/* Calling 'QWindow::winId()' ensures that the platform window has been created */
-	window->winId();
-
-	_platform_window = static_cast<QGenodePlatformWindow*>(window->handle());
-	connect(_platform_window, SIGNAL(framebuffer_changed()), this, SLOT(framebuffer_changed()));
-}
+: QPlatformBackingStore(window) { }
 
 QPaintDevice *QGenodeWindowSurface::paintDevice()
 {
 	if (verbose)
 		qDebug() << "QGenodeWindowSurface::paintDevice()";
 
-	if (_framebuffer_changed) {
+	QGenodePlatformWindow *platform_window = static_cast<QGenodePlatformWindow*>(window()->handle());
+	QRect geo = platform_window->geometry();
 
-		_framebuffer_changed = false;
-
-		/*
-		 * It can happen that 'resize()' was not called yet, so the size needs
-		 * to be obtained from the window.
-		 */
+	if (geo.size() != _image.size()) {
 		QImage::Format format = QGuiApplication::primaryScreen()->handle()->format();
-		QRect geo = _platform_window->geometry();
 		_image = QImage(geo.width(), geo.height(), format);
-
-		if (verbose)
-			qDebug() << "QGenodeWindowSurface::paintDevice(): w =" << geo.width() << ", h =" << geo.height();
 	}
 
 	if (verbose)
@@ -79,14 +62,14 @@ void QGenodeWindowSurface::flush(QWindow *window, const QRegion &region, const Q
 		         << ", offset =" << offset
 		         << ")";
 
-	if (offset != QPoint(0, 0)) {
+	if (offset != QPoint(0, 0))
 		Genode::warning("QGenodeWindowSurface::flush(): offset not handled");
-	}
 
 	QImage::Format format = QGuiApplication::primaryScreen()->handle()->format();
-	QRect geo = _platform_window->geometry();
+	QGenodePlatformWindow *platform_window = static_cast<QGenodePlatformWindow*>(window->handle());
+	QRect geo = platform_window->geometry();
 
-	QImage framebuffer_image(_platform_window->framebuffer(),
+	QImage framebuffer_image(platform_window->framebuffer(),
 	                         geo.width(), geo.height(),
 	                         format);
 
@@ -103,10 +86,10 @@ void QGenodeWindowSurface::flush(QWindow *window, const QRegion &region, const Q
 
 		framebuffer_painter.drawImage(rect, _image, rect);
 
-		_platform_window->refresh(rect.x(),
-		                          rect.y(),
-		                          rect.width(),
-		                          rect.height());
+		platform_window->refresh(rect.x(),
+		                         rect.y(),
+		                         rect.width(),
+		                         rect.height());
 	}
 }
 
@@ -119,11 +102,12 @@ void QGenodeWindowSurface::resize(const QSize &size, const QRegion &)
 {
 	if (verbose)
 		qDebug() << "QGenodeWindowSurface::resize:" << this << size;
-}
 
-void QGenodeWindowSurface::framebuffer_changed()
-{
-	_framebuffer_changed = true;
+	/*
+	 * It happened in the past that this function was called later
+	 * than 'paintDevice()`, so the image size gets adapted there
+	 * instead.
+	 */
 }
 
 QT_END_NAMESPACE
