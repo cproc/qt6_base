@@ -990,6 +990,9 @@ enum {
 */
 QByteArray QSysInfo::machineUniqueId()
 {
+#if defined(Q_OS_GENODE)
+    return QByteArray();
+#endif
 #if defined(Q_OS_DARWIN) && __has_include(<IOKit/IOKitLib.h>)
     char uuid[UuidStringLen + 1];
     static const mach_port_t defaultPort = 0; // Effectively kIOMasterPortDefault/kIOMainPortDefault
