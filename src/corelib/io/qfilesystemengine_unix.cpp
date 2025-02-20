@@ -1501,7 +1501,10 @@ bool QFileSystemEngine::removeFile(const QFileSystemEntry &entry, QSystemError &
 bool QFileSystemEngine::setPermissions(const QFileSystemEntry &entry, QFile::Permissions permissions, QSystemError &error, QFileSystemMetaData *data)
 {
     Q_CHECK_FILE_NAME(entry, false);
-
+#ifdef Q_OS_GENODE
+    /* chmod() is currently not implemented on Genode */
+    return true;
+#else
     mode_t mode = QtPrivate::toMode_t(permissions);
     bool success = ::chmod(entry.nativeFilePath().constData(), mode) == 0;
     if (success && data) {
@@ -1512,6 +1515,7 @@ bool QFileSystemEngine::setPermissions(const QFileSystemEntry &entry, QFile::Per
     if (!success)
         error = QSystemError(errno, QSystemError::StandardLibraryError);
     return success;
+#endif
 }
 
 //static
