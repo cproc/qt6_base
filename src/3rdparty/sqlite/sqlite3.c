@@ -171,7 +171,12 @@
 #else
 /* This is not VxWorks. */
 #define OS_VXWORKS 0
+#ifdef __GENODE__
+/* fchown() is currently not implemented on Genode */
+#undef HAVE_FCHOWN
+#else
 #define HAVE_FCHOWN 1
+#endif
 #define HAVE_READLINK 1
 #define HAVE_LSTAT 1
 #endif /* defined(_WRS_KERNEL) */
