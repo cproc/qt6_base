@@ -15395,7 +15395,7 @@ typedef INT16_TYPE LogEst;
 /*
 ** Disable MMAP on platforms where it is known to not work
 */
-#if defined(__OpenBSD__) || defined(__QNXNTO__)
+#if defined(__OpenBSD__) || defined(__QNXNTO__) || defined(__GENODE__)
 # undef SQLITE_MAX_MMAP_SIZE
 # define SQLITE_MAX_MMAP_SIZE 0
 #endif
