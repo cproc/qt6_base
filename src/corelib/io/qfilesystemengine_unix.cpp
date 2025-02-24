@@ -1517,6 +1517,10 @@ bool QFileSystemEngine::setPermissions(const QFileSystemEntry &entry, QFile::Per
 //static
 bool QFileSystemEngine::setPermissions(int fd, QFile::Permissions permissions, QSystemError &error, QFileSystemMetaData *data)
 {
+#ifdef Q_OS_GENODE
+    /* fchmod() is currently not implemented on Genode */
+    return true;
+#else
     mode_t mode = QtPrivate::toMode_t(permissions);
 
     bool success = ::fchmod(fd, mode) == 0;
@@ -1528,6 +1532,7 @@ bool QFileSystemEngine::setPermissions(int fd, QFile::Permissions permissions, Q
     if (!success)
         error = QSystemError(errno, QSystemError::StandardLibraryError);
     return success;
+#endif
 }
 
 //static
