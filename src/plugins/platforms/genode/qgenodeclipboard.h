@@ -46,7 +46,7 @@ class QGenodeClipboard : public QObject, public QPlatformClipboard
 
 		Genode::Reporter *_clipboard_reporter = nullptr;
 
-		char *_decoded_clipboard_content = nullptr;
+		char *_unquoted_clipboard_content = nullptr;
 
 		QMember<QMimeData> _mimedata;
 
