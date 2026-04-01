@@ -13,7 +13,9 @@
 #include <xcb/xcb_renderutil.h>
 
 #include <sys/ipc.h>
+#if 0
 #include <sys/shm.h>
+#endif
 #include <sys/mman.h>
 
 #include <stdio.h>
@@ -370,6 +372,7 @@ void QXcbBackingStoreImage::createShmSegment(size_t segmentSize)
 bool QXcbBackingStoreImage::createSystemVShmSegment(xcb_connection_t *c, size_t segmentSize,
                                                     xcb_shm_segment_info_t *shmInfo)
 {
+#if 0
     const int id = shmget(IPC_PRIVATE, segmentSize, IPC_CREAT | 0600);
     if (id == -1) {
         qCWarning(lcQpaXcb, "shmget() failed (%d: %s) for size %zu", errno, strerror(errno), segmentSize);
@@ -406,6 +409,9 @@ bool QXcbBackingStoreImage::createSystemVShmSegment(xcb_connection_t *c, size_t 
         shmInfo->shmaddr = static_cast<quint8 *>(addr);
     }
     return true;
+#else
+    return false;
+#endif
 }
 
 void QXcbBackingStoreImage::destroyShmSegment()
@@ -425,10 +431,12 @@ void QXcbBackingStoreImage::destroyShmSegment()
     } else
 #endif
     {
+#if 0
         if (shmdt(m_shm_info.shmaddr) == -1) {
             qCWarning(lcQpaXcb, "shmdt() failed (%d: %s) for %p",
                       errno, strerror(errno), m_shm_info.shmaddr);
         }
+#endif
         m_shm_info.shmid = 0; // unused
     }
     m_shm_info.shmaddr = nullptr;
