@@ -19,9 +19,7 @@
 
 #include <mutex>
 
-#ifdef Q_OS_FREEBSD
-#include <dev/evdev/input.h>
-#elif defined(Q_OS_VXWORKS)
+#if defined(Q_OS_VXWORKS)
 #include <qpa/qplatformscreen.h>
 #include <evdevLib.h>
 #define SYN_REPORT      0

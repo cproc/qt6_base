@@ -9,6 +9,10 @@
 #pragma qt_sync_stop_processing
 #endif
 
+#ifdef __cplusplus
+#  include <type_traits>
+#endif
+
 #include <QtCore/qtconfigmacros.h>
 #include <QtCore/qcompilerdetection.h>
 

@@ -242,6 +242,7 @@ template <typename In> constexpr auto to_Qt(In in) noexcept
 
 #define QT_DECLARE_ORDERING_HELPER_TEMPLATE(OrderingType, LeftType, RightType, Constexpr, \
                                             Noexcept, Attributes) \
+    QT_WARNING_DISABLE_CLANG("-Wzero-as-null-pointer-constant") \
     Attributes \
     friend Constexpr bool operator<(LeftType const &lhs, RightType const &rhs) Noexcept \
     { \
@@ -279,6 +280,7 @@ template <typename In> constexpr auto to_Qt(In in) noexcept
 // Helpers for reversed ordering, using the existing compareThreeWay() function.
 #define QT_DECLARE_REVERSED_ORDERING_HELPER_TEMPLATE(OrderingType, LeftType, RightType, Constexpr, \
                                                      Noexcept, Attributes) \
+    QT_WARNING_DISABLE_CLANG("-Wzero-as-null-pointer-constant") \
     Attributes \
     friend Constexpr bool operator<(RightType const &lhs, LeftType const &rhs) Noexcept \
     { return is_gt(compareThreeWay(rhs, lhs)); } \
