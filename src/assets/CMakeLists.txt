@@ -2,6 +2,6 @@
 # SPDX-License-Identifier: BSD-3-Clause
 add_subdirectory(icons)
 
-if (NOT INTEGRITY AND TARGET Qt6::Network AND TARGET Qt6::Concurrent)
+if (NOT INTEGRITY AND TARGET Qt6::Network AND TARGET Qt6::Concurrent AND FALSE)
     add_subdirectory(downloader)
 endif()
