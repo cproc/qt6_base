@@ -660,10 +660,14 @@ inline bool globalUsingVfork() noexcept
     return false;
 #endif
 
+#if !defined(Q_OS_GENODE)
     // Dynamically detect whether libasan or libtsan are loaded into the
     // process' memory. We need this because the user's code may be compiled
     // with ASan or TSan, but not Qt.
     return __interceptor_vfork == nullptr;
+#else
+    return false;
+#endif
 }
 
 inline bool QChildProcess::usingVfork() const noexcept
