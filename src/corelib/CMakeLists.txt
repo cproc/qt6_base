@@ -399,9 +399,9 @@ if(QT_FEATURE_thread)
     target_link_libraries(Platform INTERFACE Threads::Threads)
 endif()
 
-if(CMAKE_SYSTEM_NAME STREQUAL FreeBSD)
-  target_link_libraries(Core PRIVATE kvm procstat)
-endif()
+#if(CMAKE_SYSTEM_NAME STREQUAL FreeBSD)
+#  target_link_libraries(Core PRIVATE kvm procstat)
+#endif()
 
 # Skip AUTOMOC processing of qobject.cpp and its headers.
 # We do this on purpose, because qobject.cpp contains a bunch of Q_GADGET, Q_NAMESPACE, etc
