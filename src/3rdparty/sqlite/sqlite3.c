@@ -40209,7 +40209,22 @@ static int unixSleep(sqlite3_vfs*,int);
 ** attempt to set the lock.
 */
 #ifndef SQLITE_ENABLE_SETLK_TIMEOUT
+
+#ifdef __GENODE__
+/*
+ * F_SETLK is currently not implemented on Genode.
+ */
+static int osSetPosixAdvisoryLock(
+  int h,                /* The file descriptor on which to take the lock */
+  struct flock *pLock,  /* The description of the lock */
+  unixFile *pFile       /* Structure holding timeout value */
+){
+  return 0;
+}
+#else
 # define osSetPosixAdvisoryLock(h,x,t) osFcntl(h,F_SETLK,x)
+#endif
+
 #else
 static int osSetPosixAdvisoryLock(
   int h,                /* The file descriptor on which to take the lock */
