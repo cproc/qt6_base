@@ -17,9 +17,7 @@
 
 #include "qnamespace.h"
 #include "private/qglobal_p.h"
-#ifdef Q_OS_FREEBSD
-#include <dev/evdev/input.h>
-#elif !defined(Q_OS_VXWORKS)
+#if !defined(Q_OS_VXWORKS)
 #include "linux/input.h"
 #endif
 

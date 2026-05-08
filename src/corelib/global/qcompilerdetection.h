@@ -959,7 +959,7 @@
 #  define Q_REQUIRED_RESULT [[nodiscard]]
 #endif
 
-#if __has_cpp_attribute(nodiscard) >= 201907L /* used for both P1771 and P1301... */
+#if __has_cpp_attribute(nodiscard) >= 201907L && (!defined(Q_CC_CLANG) || __cplusplus >= 201907L) /* used for both P1771 and P1301... */
 // [[nodiscard]] constructor (P1771)
 #  ifndef Q_NODISCARD_CTOR
 #    define Q_NODISCARD_CTOR [[nodiscard]]
