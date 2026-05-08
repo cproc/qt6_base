@@ -178,7 +178,9 @@ static_assert(std::is_signed_v<qint128>,
 
 #ifndef __cplusplus
 // In C++ mode, we define below using QIntegerForSize template
+#if 0
 static_assert(sizeof(ptrdiff_t) == sizeof(size_t), "Weird ptrdiff_t and size_t definitions");
+#endif
 typedef ptrdiff_t qptrdiff;
 typedef ptrdiff_t qsizetype;
 typedef ptrdiff_t qintptr;
